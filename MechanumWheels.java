@@ -61,13 +61,10 @@ public class BasicOpMode_Iterative extends OpMode
         double leftRearPower;
         double rightRearPower;
 
-        double r = Math.hypot(left_stick_x, left_stick_y);
-        double robotAngle = Math.atan2(left_stick_y, left_stick_x) - Math.PI / 4;
-
-        leftFrontPower = r * Math.cos(robotAngle) + right_stick_x);
-        rightFrontPower = r * Math.sin(robotAngle) - right_stick_x;
-        leftRearPower = r * Math.sin(robotAngle) + right_stick_x;
-        rightRearPower = r * Math.cos(robotAngle) - right_stick_x;
+        leftFrontPower = left_stick_x + left_stick_y + right_stick_x;
+        rightFrontPower = -left_stick_x + left_stick_y - right_stick_x;
+        leftRearPower = -left_stick_x + left_stick_y + right_stick_x;
+        rightRearPower = left_stick_x + left_stick_y - right_stick_x;
 
         // Send calculated power to wheels
         leftFront.setPower(leftFrontPower);
@@ -77,7 +74,7 @@ public class BasicOpMode_Iterative extends OpMode
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "left_front (%.2f), right_front (%.2f), left_rear (%.2f), right_rear (%.2f)", leftFrontPower, rightFrontPower, leftRearPower, rightRearPower);
+        telemetry.addData("Motors", "left_front power: " + leftFrontPower + "right_front power: " + rightFrontPower + "left_rear power: " + leftRearPower + "right_rear power: " + rightRearPower);
     }
 
     /*
